@@ -7,7 +7,7 @@ output: html_document
 
 In this week's lab, you'll follow along to learn how to perform, assess, interpret and communicate outcomes from multiple linear regression using the **penguins** data from the `palmerpenguins` package. 
 
-When we perform multiple linear regression, we are trying to understand the relationship between multiple predictor variables (continuous or categorical), and a single continuous output variable. Make sure to watch the Week 8 lecture (and read the accompanying document) to learn more. 
+When we perform multiple linear regression, we are trying to understand the relationship between multiple predictor variables (continuous or categorical), and a single continuous output variable. Make sure to watch the Week 8 recorded lecture, and read the posted document on GauchoSpace, to learn more. 
 
 ### 2. Set-up
 
@@ -136,7 +136,7 @@ What else is included in that output? The standard error is a measure of the acc
 Excluding the meaningless intercept here, that means that only the coefficient for **speciesChinstrap** is not significantly different from zero (i.e., if all other variables are constant, chinstrap mean mass does not differ significantly from Adélie mean mass) - which is consistent with exploratory analyses that show very similar body masses for those two species.  
 **Critical thinking:** Do the other coefficients (for flipper length, speciesGentoo and sexmale) align with your expectations based on exploratory data visualization? You should **always** consider model outputs alongside data visualization & exploration! 
 
-##### Overall mdel fit and significance
+##### Overall model fit and significance
 
 You can see and parse information for the overall model using `broom::glance()`:
 
@@ -153,7 +153,27 @@ The pieces that we'll focus on for now are:
 - `sigma`: residual standard error (measure of model accuracy)
 - `p.value`: The overall model *p*-value
 
-### 5. Communicate results of your model
+### 5. Model diagnostics
+
+Recall, we need to evaluate some important assumptions of multiple linear regression that can be best evaluated *after* the model is created, including:
+
+- Normality of residuals
+- Heteroscedasticity
+
+As we did for simple linear regression, use the `plot()` function to look at diagnostic plots for the model. Run the code below to produce diagnostic plots, from which we can see:
+
+- Residuals are *very* normally distributed (from the QQ plot)
+- Residuals variance is relatively constant across fitted values of the model, indicating homoscedasticity
+- No notable outliers with disproportionate leverage on the model results (as seen from the Cook's distance graph)
+
+Overall takeaway: no concerns about assumption violations based on these diagnostic plots.
+
+```{r}
+plot(penguin_lm)
+```
+
+
+### 6. Communicate results of your model
 
 Because there is a lot of information to include when reporting the results of multiple linear regression, results are most often reported in a table. They are also often challenging to create manually, though `broom::tidy()` provides a good starting point. 
 
@@ -161,7 +181,7 @@ There also exist a number of R packages to automate creating regression tables (
 
 Here are a couple of options: 
 
-##### A regular `kable` table
+#### a. A regular `kable` table
 
 Starting from the tidy output and finalize manually (possibly with `kableExtra`, `gt`, or similar table-making packages). You'd want to further customize this (e.g. round to a reasonable number of significant figures, update 'Term' words, etc.). 
 
@@ -178,7 +198,7 @@ penguin_lm_tidy %>%
 
 ```
 
-##### The `stargazer` package
+#### b. The `stargazer` package
 
 Another option is the `stargazer` package, which creates a comprehensive regression table (including in html format). 
 
@@ -192,5 +212,6 @@ stargazer(penguin_lm, type = "html")
 ```
 
 If you run the code in RStudio, it will look like a nightmare - that's your table in HTML code! Once you knit, you should see it appear. You'd probably want to customize it a bit, but it's a great starting point. 
+
 
 ## END WEEK 8 LAB
