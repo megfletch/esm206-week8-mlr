@@ -31,10 +31,10 @@ knitr::opts_chunk$set(echo = TRUE,
 
 library(tidyverse)
 library(palmerpenguins)
-library(GGally) # May need to install
+library(GGally) 
 library(broom)
 library(kableExtra)
-library(stargazer) # May need to install this one
+library(stargazer) 
 
 ```
 
@@ -215,3 +215,89 @@ If you run the code in RStudio, it will look like a nightmare - that's your tabl
 
 
 ## END WEEK 8 LAB
+
+
+## Questions from Week 8 Lecture:
+
+A researcher is investigating the impacts of stream water temperature (∘C), volumetric flow rate (cubic feet per second, cfs), and substrate composition (gravel, sand, or mud) on chlorophyll concentration (μg/L). After thoroughly exploring and thinking really hard about the data, they determine that multiple linear regression is an appropriate approach to explore relationships between variables.
+
+Performing multiple linear regression in R, they find the following model:
+chlorophyll = 19.2 + 1.3*(temperature) - 0.04*(flow_rate) - 8.6*(gravel) - 5.1*(sand)
+
+**A. What are the predictor and outcome variables, and what type of variable is each?**
+The predictor variable is chlorophyll concentration (continuous variable).
+The outcome variables are:
+- temperature (continuous variable)
+- flow rate (continuous variable) 
+- substrate composition (a categorical variable with three levels: mud, gravel, or sand)
+
+**B. What is the reference level for stream substrate composition?**
+The reference level for stream substrate is **mud** (the level that does not appear explicitly in the regression model)
+
+**C. Interpret each of the model coefficients.**
+
+**Write a sentence describing what the 1.3 coefficient for temperature means**
+For each 1 ∘C increase in water temperature, we expect chlorophyll concentration to increase by 1.3 μg/L, on average.
+
+**Write a sentence describing what the -0.04 coefficient for flow_rate means**
+For each 1 cfs increase in flow rate, we expect chlorophyll concentration to decrease by 0.04 μg/L, on average.
+
+**Write a sentence describing what the -8.6 coefficient for gravel means**
+If stream conditions are otherwise the same, we expect chlorophyll concentration in a stream with gravel substrate to be 8.6 μg/L less than in a stream with mud substrate, on average.
+
+**Write a sentence describing what the -5.1 coefficient for sand means**
+If stream conditions are otherwise the same, we expect chlorophyll concentration in a stream with sand substrate to be 5.1 μg/L less than in a stream with mud substrate, on average.
+
+**D. Make chlorophyll concentration predictions for streams with the following conditions:**
+
+**What is the predicted chlorophyll concentration for a stream with a flow rate of 184 cfs, temperature of 18.4 ∘C, with gravel substrate?**
+chlorophyll = 19.2 + 1.3*(18.4) - 0.04*(184) - 8.6*(1) - 5.1*(0) = 27.2 μg/L
+
+**What is the predicted chlorophyll concentration for a stream with a flow rate of 386 cfs, temperature of 16.1 ∘C, with mud substrate?**
+chlorophyll = 19.2 + 1.3*(16.1) - 0.04*(386) - 8.6*(0) - 5.1*(0) = 24.7 μg/L
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
